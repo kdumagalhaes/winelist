@@ -1,35 +1,32 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-const UserController = require('./controllers/UserController')
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const routes = require('./routes');
+const path = require('path');
+const app = express();
 
-const app = express()
+const PORT = process.env.PORT || 8000;
 
-const PORT = process.env.PORT || 8000
+app.use(cors());
+app.use(express.json());
 
-if(process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
 }
-
-app.use(cors())
-app.use(express.json())
-
-app.get('/', (req, res) => {
-    res.send('Hello from Paris')
-})
-
-app.post('/register', UserController.store)
 
 try {
-    mongoose.connect(process.env.MONGO_DB_CONNECTION, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-    })
-    console.log('MongoDB connected!')
+  mongoose.connect(process.env.MONGO_DB_CONNECTION, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  console.log('MongoDB connected!');
 } catch (error) {
-    console.log(error)
+  console.log(error);
 }
 
+app.use("/files", express.static(path.resolve(__dirname, "..", "files")))
+app.use(routes);
+
 app.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`)
-})
+  console.log(`Listening on ${PORT}`);
+});
