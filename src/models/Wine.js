@@ -8,6 +8,7 @@ const WineSchema = new mongoose.Schema(
     thumbnail: String,
     updated: { type: Date, default: Date.now },
     price: Number,
+    wineType: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
