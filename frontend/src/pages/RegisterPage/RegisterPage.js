@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
 import RegisterForm from '../../components/Forms/RegisterForm/RegisterForm'
 
-const RegisterPage = () => {
+const RegisterPage = ({history}) => {
   return (
     <RegisterPageDiv>
       <Helmet>
@@ -18,7 +18,7 @@ const RegisterPage = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <RegisterForm/>
+        <RegisterForm history={history}/>
         <span>Already have an account?</span>
         <h3>
           <Link to="/">Log in</Link>
