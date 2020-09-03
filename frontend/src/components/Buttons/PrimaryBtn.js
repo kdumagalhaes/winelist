@@ -1,12 +1,8 @@
-import React from 'react'
-import {PrimaryBtnTag} from './PrimaryBtnStyles'
+import React from 'react';
+import { PrimaryBtnTag } from './PrimaryBtnStyles';
 
-const PrimaryBtn = () => {
-    return (
-        <PrimaryBtnTag>
-            Log In
-        </PrimaryBtnTag>
-    )
-}
+const PrimaryBtn = ({ textContent }) => {
+  return <PrimaryBtnTag>{textContent}</PrimaryBtnTag>;
+};
 
-export default PrimaryBtn
+export default PrimaryBtn;

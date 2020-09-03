@@ -1,22 +1,22 @@
 import styled from 'styled-components';
-import BackgroundImgLoginPage from '../../assets/winelist-login-page.png'
+import BackgroundImgRegisterPage from '../../assets/winelist-register-page.png';
 
-export const LoginPageDiv = styled.div`
+export const RegisterPageDiv = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.color0};
+  background-color: ${({ theme }) => theme.colors.color2};
   display: flex;
 `;
 
 export const LeftDiv = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    p,
+  p,
   span {
     color: ${({ theme }) => theme.colors.color4};
   }
@@ -43,15 +43,15 @@ export const LeftDiv = styled.div`
       }
     }
   }
-`
+`;
 
 export const RightDiv = styled.div`
-    height: 100vh;
-    width: 100%;
-    max-width: 895px;
-    background-image: url(${BackgroundImgLoginPage});
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
+  height: 100vh;
+  width: 100%;
+  max-width: 895px;
+  background-image: url(${BackgroundImgRegisterPage});
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

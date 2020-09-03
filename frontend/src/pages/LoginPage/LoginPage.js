@@ -1,19 +1,24 @@
 import React from 'react';
 import { LoginPageDiv, LeftDiv, RightDiv } from './LoginPageStyles';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
-import LoginForm from '../../components/LoginForm/LoginForm'
+import LoginForm from '../../components/Forms/LoginForm/LoginForm'
 
-const LoginPage = ({history}) => {
+const LoginPage = ({ history }) => {
   return (
     <LoginPageDiv>
       <Helmet>
         <title>WineList • Login Page</title>
       </Helmet>
-        <LeftDiv>
-            <LoginForm history={history} />
-        </LeftDiv>
-        <RightDiv></RightDiv>
+      <LeftDiv>
+        <LoginForm history={history} />
+        <span>Don't you have an account yet?</span>
+        <h3>
+          <Link to="/register">Create account</Link>
+        </h3>
+      </LeftDiv>
+      <RightDiv></RightDiv>
     </LoginPageDiv>
   );
 };

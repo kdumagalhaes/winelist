@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { LoginFormTag, InputsDiv } from './LoginFormStyles';
 
-import Logo from '../../components/Logo/Logo';
-import PrimaryBtn from '../../components/Buttons/PrimaryBtn';
+import Logo from '../../Logo/Logo';
+import PrimaryBtn from '../../Buttons/PrimaryBtn';
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
 const LoginForm = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -36,6 +36,7 @@ const LoginForm = ({ history }) => {
           name="email"
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
+          autoFocus
         />
         <label htmlFor="name">Password:</label>
         <input
@@ -46,7 +47,7 @@ const LoginForm = ({ history }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </InputsDiv>
-      <PrimaryBtn />
+      <PrimaryBtn textContent="Log in" />
     </LoginFormTag>
   );
 };
