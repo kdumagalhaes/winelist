@@ -3,15 +3,15 @@ import BackgroundImgRegisterPage from '../../assets/winelist-register-page.png';
 
 export const RegisterPageDiv = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${({ theme }) => theme.colors.color2};
   display: flex;
 `;
 
 export const LeftDiv = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
+  height: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -25,12 +25,12 @@ export const LeftDiv = styled.div`
     max-width: 370px;
     font-size: 0.95rem;
     text-align: center;
-    margin: 20px 0 40px 0;
+    margin: 20px 0 20px 0;
   }
 
   span {
     font-size: 1rem;
-    margin: 20px;
+    margin: 10px;
   }
 
   h3 {
@@ -46,9 +46,9 @@ export const LeftDiv = styled.div`
 `;
 
 export const RightDiv = styled.div`
-  height: 100vh;
   width: 100%;
   max-width: 895px;
+  height: 100vh;
   background-image: url(${BackgroundImgRegisterPage});
   background-size: cover;
   display: flex;

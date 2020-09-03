@@ -23,6 +23,7 @@ const RegisterForm = ({ history }) => {
 
     if (userId) {
       localStorage.setItem('user', userId);
+      localStorage.setItem('firstName', firstName);
       history.push('/dashboard');
     } else {
       const { message } = response.data;
@@ -42,6 +43,7 @@ const RegisterForm = ({ history }) => {
             placeholder="First name..."
             autoFocus
             onChange={(e) => setFirstName(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -52,6 +54,7 @@ const RegisterForm = ({ history }) => {
             name="lastName"
             placeholder="Last name..."
             onChange={(e) => setLastName(e.target.value)}
+            required
           />
         </div>
       </NamesDiv>
@@ -62,6 +65,7 @@ const RegisterForm = ({ history }) => {
         name="email"
         placeholder="Enter your email"
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
 
       <label htmlFor="name">Password:</label>
@@ -71,9 +75,10 @@ const RegisterForm = ({ history }) => {
         name="password"
         placeholder="••••••"
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
 
-      <PrimaryBtn textContent="Register" />
+      <PrimaryBtn textContent="Register" height="50px" />
     </RegisterFormTag>
   );
 };

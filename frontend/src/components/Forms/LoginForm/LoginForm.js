@@ -37,6 +37,7 @@ const LoginForm = ({ history }) => {
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
           autoFocus
+          required
         />
         <label htmlFor="name">Password:</label>
         <input
@@ -45,9 +46,10 @@ const LoginForm = ({ history }) => {
           name="password"
           placeholder="••••••"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </InputsDiv>
-      <PrimaryBtn textContent="Log in" />
+      <PrimaryBtn textContent="Log in" height="50px"/>
     </LoginFormTag>
   );
 };
