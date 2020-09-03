@@ -4,14 +4,14 @@ import { Helmet } from 'react-helmet';
 
 import LoginForm from '../../components/LoginForm/LoginForm'
 
-const LoginPage = () => {
+const LoginPage = ({history}) => {
   return (
     <LoginPageDiv>
       <Helmet>
         <title>WineList • Login Page</title>
       </Helmet>
         <LeftDiv>
-            <LoginForm/>
+            <LoginForm history={history} />
         </LeftDiv>
         <RightDiv></RightDiv>
     </LoginPageDiv>

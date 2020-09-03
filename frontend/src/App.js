@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { Reset } from './styles/Reset';
 import { ThemeProvider } from 'styled-components';
-import main from './styles/Theme'
+import main from './styles/Theme';
 
-import LoginPage from './pages/LoginPage/LoginPage'
+import Routes from './routes';
 
 function App() {
   return (
     <Fragment>
       <ThemeProvider theme={main}>
-        <LoginPage/>
+        <Routes />
         <Reset />
       </ThemeProvider>
     </Fragment>
