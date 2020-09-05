@@ -22,7 +22,7 @@ const Dashboard = () => {
       <NavTag>
         <Logo/>
         <input type="search" placeholder="Find your wine..." />
-        <PrimaryBtn setModal={setModal} textContent="+ Insert Wine" height="40px" maxWidth="180px"/>
+        <button onClick={() => setModal(true)}>+ Insert Wine</button>
         <span>Hi, <strong>{firstName}</strong></span>
       </NavTag>
       <WineForm modalVisibility={modalVisibility} setModal={setModal}/>

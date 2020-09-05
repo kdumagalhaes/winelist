@@ -52,17 +52,41 @@ export const ThumbPreviewArea = styled.div`
   height: 522px;
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const ThumbPreviewDiv = styled.div`
-  margin-right: 20px;
-  border-right: 1px solid #efefef;
+  width: 100%;
+  max-width: 350px;
+  height: 522px;
+  margin: 20px 20px 20px 0;
+  border-right: 1px solid ${({ theme }) => theme.colors.color1};
+  border-left: 1px solid ${({ theme }) => theme.colors.color1};
+  display: flex;
+  position: relative;
 
-  label {
-    font-size: 0;
+  .CameraIcon {
+    background-color: ${({ theme }) => theme.colors.color4};
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+    border-radius: 50%;
+    border: 4px solid ${({ theme }) => theme.colors.color0};
+    color: ${({ theme }) => theme.colors.color2};
+    position: absolute;
+    top: -30px;
+    left: 41%;
+    cursor: pointer;
+    transition: color, background-color 0.3s;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.color2};
+      color: ${({ theme }) => theme.colors.color4};
+    }
   }
 
   input {
+    display: none;
   }
 `;
 
@@ -117,3 +141,18 @@ export const InfoDiv = styled.div`
     }
   }
 `;
+
+export const AlertDiv = styled.div `
+width: 100%;
+height: 40px;
+background-color: ${({ theme }) => theme.colors.color2};
+border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 80px;
+font-size: 0.9rem;
+font-weight: 700;
+color: ${({ theme }) => theme.colors.color4};
+margin-top: 20px;
+`

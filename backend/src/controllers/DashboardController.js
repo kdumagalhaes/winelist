@@ -18,7 +18,7 @@ module.exports = {
     
       async getAllWines(req, res) {
         const { wineType } = req.params;
-        const query = { wineType } || {};
+        const query = wineType ? { wineType } : {};
     
         try {
           const wines = await Wine.find(query);

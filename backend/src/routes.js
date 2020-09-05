@@ -26,8 +26,8 @@ routes.get('/user/:userId', UserController.getUserById);
 routes.post('/login', LoginController.store)
 
 //Dashboard
-routes.get('/wines', DashboardController.getAllWines)
-routes.get('/wines/:wineType', DashboardController.getAllWines)
+routes.get('/dashboard', DashboardController.getAllWines)
+routes.get('/dashboard/:wineType', DashboardController.getAllWines)
 routes.get('/wine/:wineId', DashboardController.getWineById)
 
 //Wine
