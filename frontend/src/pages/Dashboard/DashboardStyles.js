@@ -12,34 +12,35 @@ export const NavTag = styled.nav`
   background-color: ${({ theme }) => theme.colors.color1};
   display: flex;
   align-items: center;
+  position: relative;
 
-  input, span {
+  input,
+  span {
     margin: 0 40px;
-
   }
 
   input {
-      height: 40px;
-      border-radius: 5px;
-      border: none;
-      padding: 0 15px;
-      width: 100%;
-      max-width: 600px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 600px;
 
-      &::placeholder {
-          color: ${({theme}) => theme.colors.color3};
-      }
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.color3};
+    }
   }
 
   span {
-        color: ${({theme}) => theme.colors.color5};
-        font-size: 1.2rem;
-    } 
+    color: ${({ theme }) => theme.colors.color5};
+    font-size: 1.2rem;
+  }
 
-    button {
-    width: 100%;
-    max-width: 180px;
+  button {
+    width: 40px;
     height: 40px;
+    border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.color4};
     border: none;
     box-shadow: ${({ theme }) => theme.shadows.primaryShadow};
@@ -47,12 +48,36 @@ export const NavTag = styled.nav`
     text-transform: uppercase;
     font-size: 1rem;
     font-weight: 700;
-    border-radius: 5px;
     transition: background-color 0.3s;
 
     &:hover {
       box-shadow: none;
       background-color: ${({ theme }) => theme.colors.color5};
     }
+
+    &:hover ~ .tooltip {
+      opacity: 1;
+      transform: scale(1);
     }
+  }
+`;
+
+export const ToolTipDiv = styled.div`
+  color: ${({ theme }) => theme.colors.color4};
+  width: 100%;
+  max-width: 140px;
+  padding: 10px;
+  height: 40px;
+  background-color: ${({ theme }) => theme.colors.color1};
+  position: absolute;
+  right: 470px;
+  top: 85px;
+  border-radius: 5px;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
 `;

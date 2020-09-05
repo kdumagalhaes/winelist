@@ -10,8 +10,8 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={LoginPage} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/" exact component={Dashboard} />
+        <Route path="/login" exact component={LoginPage} />
         <Route path="/register" exact component={RegisterPage} />
         <Route path="/wines" exact component={WinePage} />
       </Switch>

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { DashboardDiv, NavTag } from './DashboardStyles';
+import { DashboardDiv, NavTag, ToolTipDiv } from './DashboardStyles';
 import { Helmet } from 'react-helmet';
+import {GiWineGlass} from 'react-icons/gi'
 
 import Logo from '../../components/Logo/Logo'
-import PrimaryBtn from '../../components/Buttons/PrimaryBtn'
 import WineForm from '../../components/Forms/WineForm/WineForm'
 
 const Dashboard = () => {
@@ -12,7 +12,6 @@ const Dashboard = () => {
 
   const [modal, setModal] = useState(false)
   const modalVisibility = modal ? 'visible' : 'hidden'
-  console.log(modalVisibility)
 
   return (
     <DashboardDiv>
@@ -22,7 +21,8 @@ const Dashboard = () => {
       <NavTag>
         <Logo/>
         <input type="search" placeholder="Find your wine..." />
-        <button onClick={() => setModal(true)}>+ Insert Wine</button>
+        <button onClick={() => setModal(true)}>+</button>
+        <ToolTipDiv className="tooltip"><GiWineGlass/> Insert a wine!</ToolTipDiv>
         <span>Hi, <strong>{firstName}</strong></span>
       </NavTag>
       <WineForm modalVisibility={modalVisibility} setModal={setModal}/>

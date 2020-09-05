@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { LoginFormTag, InputsDiv } from './LoginFormStyles';
+import { LoginFormTag, InputsDiv, AlertDiv } from './LoginFormStyles';
+import { RiAlertLine } from "react-icons/ri";
 
 import Logo from '../../Logo/Logo';
 import PrimaryBtn from '../../Buttons/PrimaryBtn';
@@ -9,6 +10,8 @@ import api from '../../../services/api';
 const LoginForm = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('false');
+  const [error, setError] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +52,10 @@ const LoginForm = ({ history }) => {
           required
         />
       </InputsDiv>
-      <PrimaryBtn textContent="Log in" height="50px"/>
+      <PrimaryBtn textContent="Log in" height="50px" />
+      {/* {errorMessage ? (
+          <AlertDiv><RiAlertLine/> You have to complete all the fields!</AlertDiv>
+        ) : ''} */}
     </LoginFormTag>
   );
 };
