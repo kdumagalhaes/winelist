@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const DashboardDiv = styled.div`
   width: 100%;
+  position: relative;
 `;
 
 export const NavTag = styled.nav`
