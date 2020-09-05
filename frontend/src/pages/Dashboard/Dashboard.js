@@ -8,11 +8,11 @@ import WineForm from '../../components/Forms/WineForm/WineForm'
 
 const Dashboard = () => {
   const user_id = localStorage.getItem('user');
-  console.log(user_id);
   const firstName = localStorage.getItem('firstName')
-  console.log(typeof firstName)
 
   const [modal, setModal] = useState(false)
+  const modalVisibility = modal ? 'visible' : 'hidden'
+  console.log(modalVisibility)
 
   return (
     <DashboardDiv>
@@ -22,10 +22,10 @@ const Dashboard = () => {
       <NavTag>
         <Logo/>
         <input type="search" placeholder="Find your wine..." />
-        <PrimaryBtn textContent="+ Insert Wine" height="40px" maxWidth="180px" onClick={() => setModal(!modal)}/>
+        <PrimaryBtn setModal={setModal} textContent="+ Insert Wine" height="40px" maxWidth="180px"/>
         <span>Hi, <strong>{firstName}</strong></span>
       </NavTag>
-      <WineForm/>
+      <WineForm modalVisibility={modalVisibility} setModal={setModal}/>
 
     </DashboardDiv>
   );

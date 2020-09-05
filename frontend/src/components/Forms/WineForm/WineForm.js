@@ -1,4 +1,4 @@
-import React, { useState, useMemo, Fragment } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   WineFormTag,
   ThumbPreviewArea,
@@ -7,10 +7,10 @@ import {
   ContainerDiv,
   CloseBtn,
 } from './WineFormStyles';
-import PrimaryBtn from '../../Buttons/PrimaryBtn'
+import PrimaryBtn from '../../Buttons/PrimaryBtn';
 import api from '../../../services/api';
 
-const WineForm = () => {
+const WineForm = ({ modalVisibility, setModal }) => {
   const user_id = localStorage.getItem('user');
 
   const [wineLabel, setWineLabel] = useState('');
@@ -30,9 +30,9 @@ const WineForm = () => {
   };
 
   return (
-    <ContainerDiv>
+    <ContainerDiv modalVisibility={modalVisibility} >
       <WineFormTag onSubmit={handleSubmit}>
-      <CloseBtn>X</CloseBtn>
+        <CloseBtn onClick={() => setModal(false)}>X</CloseBtn>
         <ThumbPreviewDiv>
           <label htmlFor="image">Upload image:</label>
           <input
@@ -99,7 +99,7 @@ const WineForm = () => {
             value={comments}
             onChange={(e) => setComments(e.target.value)}
           />
-          <PrimaryBtn textContent="Insert wine" height="50px" maxWidth="100%"/>
+          <button textContent="Insert wine" height="50px" maxWidth="100%">Insert Wine</button>
         </InfoDiv>
       </WineFormTag>
     </ContainerDiv>
