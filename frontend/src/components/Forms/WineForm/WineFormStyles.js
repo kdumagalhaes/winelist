@@ -44,6 +44,10 @@ export const WineFormTag = styled.form`
   @media (max-width: 768px) {
     flex-direction: column;
   }
+
+  input[value] {
+      color: ${({ theme }) => theme.colors.color4};
+  }
 `;
 
 export const ThumbPreviewArea = styled.div`

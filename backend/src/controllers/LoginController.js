@@ -15,7 +15,7 @@ module.exports = {
         return res
           .status(200)
           .json({
-            message: 'User not found. Do you want to register instead?',
+            message: 'User not found!',
           });
       }
 

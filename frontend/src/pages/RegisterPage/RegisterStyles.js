@@ -37,6 +37,8 @@ export const LeftDiv = styled.div`
     a {
       color: ${({ theme }) => theme.colors.color5};
       transition: ${({ theme }) => theme.transitions.primaryTransitionAll};
+      cursor: pointer;
+      text-decoration: underline;
 
       &:hover {
         color: ${({ theme }) => theme.colors.color4};

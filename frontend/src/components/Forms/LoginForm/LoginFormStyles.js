@@ -3,11 +3,15 @@ import styled from 'styled-components';
 export const LoginFormTag = styled.form`
   width: 100%;
   max-width: 350px;
-  height: 400px;
+  height: auto;
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  input[value] {
+      color: ${({ theme }) => theme.colors.color4};
+  }
 `;
 
 export const InputsDiv = styled.div`
@@ -40,17 +44,4 @@ export const InputsDiv = styled.div`
   }
 `;
 
-export const AlertDiv = styled.div`
-  width: 100%;
-  height: 40px;
-  background-color: ${({ theme }) => theme.colors.color2};
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 80px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.color4};
-  margin-top: 20px;
-`;
+

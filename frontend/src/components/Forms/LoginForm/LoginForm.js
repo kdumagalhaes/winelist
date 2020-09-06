@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { LoginFormTag, InputsDiv, AlertDiv } from './LoginFormStyles';
-import { RiAlertLine } from "react-icons/ri";
+import { RiAlertLine } from 'react-icons/ri';
 
 import Logo from '../../Logo/Logo';
 import PrimaryBtn from '../../Buttons/PrimaryBtn';
+import ErrorAlert from '../../Alerts/ErrorAlerts/ErrorAlert'
 
 import api from '../../../services/api';
 
 const LoginForm = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [errorMessage, setErrorMessage] = useState('false');
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,12 +21,22 @@ const LoginForm = ({ history }) => {
     const response = await api.post('/login', { email, password });
     const userId = response.data._id || false;
 
-    if (userId) {
-      localStorage.setItem('user', userId);
-      history.push('/dashboard');
-    } else {
-      const { message } = response.data;
-      console.log(message);
+    try {
+      if (userId) {
+        localStorage.setItem('user', userId);
+        history.push('/');
+      } else {
+        const { message } = response.data;
+        setError(true);
+        setErrorMessage(message);
+        setTimeout(() => {
+          setError(false);
+          setErrorMessage('');
+        }, 2000);
+      }
+    } catch (error) {
+      setError(true);
+      setErrorMessage('Error, the server returned an error');
     }
   };
 
@@ -40,7 +52,6 @@ const LoginForm = ({ history }) => {
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
           autoFocus
-          required
         />
         <label htmlFor="name">Password:</label>
         <input
@@ -49,13 +60,18 @@ const LoginForm = ({ history }) => {
           name="password"
           placeholder="••••••"
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
       </InputsDiv>
       <PrimaryBtn textContent="Log in" height="50px" />
-      {/* {errorMessage ? (
-          <AlertDiv><RiAlertLine/> You have to complete all the fields!</AlertDiv>
-        ) : ''} */}
+      {error ? (
+        <ErrorAlert>
+          <RiAlertLine />
+          
+          {errorMessage}
+        </ErrorAlert>
+      ) : (
+        ''
+      )}
     </LoginFormTag>
   );
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BackgroundImgLoginPage from '../../assets/winelist-login-page.png'
+import BackgroundImgLoginPage from '../../assets/winelist-login-page.png';
 
 export const LoginPageDiv = styled.div`
   width: 100%;
@@ -9,14 +9,14 @@ export const LoginPageDiv = styled.div`
 `;
 
 export const LeftDiv = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    p,
+  p,
   span {
     color: ${({ theme }) => theme.colors.color4};
   }
@@ -37,21 +37,23 @@ export const LeftDiv = styled.div`
     a {
       color: ${({ theme }) => theme.colors.color5};
       transition: ${({ theme }) => theme.transitions.primaryTransitionAll};
+      cursor: pointer;
+      text-decoration: underline;
 
       &:hover {
         color: ${({ theme }) => theme.colors.color4};
       }
     }
   }
-`
+`;
 
 export const RightDiv = styled.div`
-    height: 100vh;
-    width: 100%;
-    max-width: 895px;
-    background-image: url(${BackgroundImgLoginPage});
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
+  height: 100vh;
+  width: 100%;
+  max-width: 895px;
+  background-image: url(${BackgroundImgLoginPage});
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { RegisterFormTag, NamesDiv } from './RegisterFormStyles';
 import api from '../../../services/api';
+import { RiAlertLine } from 'react-icons/ri';
 
 import PrimaryBtn from '../../Buttons/PrimaryBtn';
+import ErrorAlert from '../../Alerts/ErrorAlerts/ErrorAlert';
 
 const RegisterForm = ({ history }) => {
   const [firstName, setFirstName] = useState('');
@@ -10,24 +12,46 @@ const RegisterForm = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await api.post('/user/register', {
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-    const userId = response.data._id || false;
+    if (
+      email !== '' &&
+      password !== '' &&
+      firstName !== '' &&
+      lastName !== ''
+    ) {
+      const response = await api.post('/user/register', {
+        email,
+        password,
+        firstName,
+        lastName,
+      });
+      const userId = response.data._id || false;
 
-    if (userId) {
-      localStorage.setItem('user', userId);
-      localStorage.setItem('firstName', firstName);
-      history.push('/dashboard');
+      if (userId) {
+        localStorage.setItem('user', userId);
+        localStorage.setItem('firstName', firstName);
+        history.push('/dashboard');
+      } else {
+        const { message } = response.data;
+        setError(true);
+        setErrorMessage(message);
+        setTimeout(() => {
+          setError(false);
+          setErrorMessage('');
+        }, 2000);
+      }
     } else {
-      const { message } = response.data;
-      console.log(message);
+      setError(true);
+      setErrorMessage('You need to fill all the fields.');
+      setTimeout(() => {
+        setError(false);
+        setErrorMessage('');
+      }, 2000);
     }
   };
 
@@ -43,7 +67,6 @@ const RegisterForm = ({ history }) => {
             placeholder="First name..."
             autoFocus
             onChange={(e) => setFirstName(e.target.value)}
-            required
           />
         </div>
         <div>
@@ -54,7 +77,6 @@ const RegisterForm = ({ history }) => {
             name="lastName"
             placeholder="Last name..."
             onChange={(e) => setLastName(e.target.value)}
-            required
           />
         </div>
       </NamesDiv>
@@ -65,9 +87,7 @@ const RegisterForm = ({ history }) => {
         name="email"
         placeholder="Enter your email"
         onChange={(e) => setEmail(e.target.value)}
-        required
       />
-
       <label htmlFor="name">Password:</label>
       <input
         type="password"
@@ -75,10 +95,17 @@ const RegisterForm = ({ history }) => {
         name="password"
         placeholder="••••••"
         onChange={(e) => setPassword(e.target.value)}
-        required
       />
-
       <PrimaryBtn textContent="Register" height="50px" />
+      {error ? (
+        <ErrorAlert>
+          <RiAlertLine />
+          
+          {errorMessage}
+        </ErrorAlert>
+      ) : (
+        ''
+      )}{' '}
     </RegisterFormTag>
   );
 };

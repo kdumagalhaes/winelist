@@ -7,12 +7,12 @@ export const DashboardDiv = styled.div`
 
 export const NavTag = styled.nav`
   width: 100%;
-  padding: 0 20px 0 20px;
+  padding: 0 40px 0 40px;
   height: 80px;
   background-color: ${({ theme }) => theme.colors.color1};
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: space-between;
 
   input,
   span {
@@ -34,12 +34,12 @@ export const NavTag = styled.nav`
 
   span {
     color: ${({ theme }) => theme.colors.color5};
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   button {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.color4};
     border: none;
@@ -60,18 +60,32 @@ export const NavTag = styled.nav`
       transform: scale(1);
     }
   }
+
+  .logout-icon {
+    color: ${({ theme }) => theme.colors.color5};
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.color3};
+    }
+  }
+`;
+
+export const ButtonToolTipDiv = styled.div`
+  position: relative;
 `;
 
 export const ToolTipDiv = styled.div`
   color: ${({ theme }) => theme.colors.color4};
-  width: 100%;
-  max-width: 140px;
+  width: 140px;
   padding: 10px;
   height: 40px;
   background-color: ${({ theme }) => theme.colors.color1};
   position: absolute;
-  right: 470px;
-  top: 85px;
+  left: -45px;
+  top: 70px;
   border-radius: 5px;
   opacity: 0;
   transform: scale(0);

@@ -15,7 +15,7 @@ const LoginPage = ({ history }) => {
         <LoginForm history={history} />
         <span>Don't you have an account yet?</span>
         <h3>
-          <Link to="/register">Create account</Link>
+          <a onClick={() => history.push('/register')}>Create account</a>
         </h3>
       </LeftDiv>
       <RightDiv></RightDiv>
