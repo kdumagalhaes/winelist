@@ -29,9 +29,12 @@ export const NavTag = styled.nav`
     padding: 0 15px;
     width: 100%;
     max-width: 600px;
+    color: ${({ theme }) => theme.colors.color4};
+    font-weight: 700;
 
-    &::placeholder {
+    &::placeholder, [value] {
       color: ${({ theme }) => theme.colors.color3};
+      font-weight: 400;
     }
   }
 

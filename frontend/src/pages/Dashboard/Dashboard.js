@@ -20,19 +20,26 @@ const Dashboard = () => {
   const user_id = localStorage.getItem('user');
   const firstName = localStorage.getItem('firstName');
   const [wines, setWines] = useState([]);
+  const [search, setSearch] = useState('');
+  console.log(search);
+
+  const filteredWines = wines.filter((wine) => {
+    return (
+      wine.wineLabel.toLowerCase().includes(search.toLocaleLowerCase()) ||
+      wine.wineType.toLowerCase().includes(search.toLocaleLowerCase())
+    );
+  });
 
   const getWines = async () => {
     const url = '/dashboard';
     const response = await api.get(url, { headers: { user_id } });
 
     setWines(response.data);
-    console.log(response.data)
-    console.log(user_id)
   };
 
   useEffect(() => {
-    getWines()
-}, [])
+    getWines();
+  }, []);
 
   const [modal, setModal] = useState(false);
   const modalVisibility = modal ? 'visible' : 'hidden';
@@ -44,7 +51,14 @@ const Dashboard = () => {
       </Helmet>
       <NavTag>
         <Logo />
-        <input type="search" placeholder="Find your wine..." />
+        <input
+          id="searchBar"
+          name="searchBar"
+          type="search"
+          placeholder="Find your wine..."
+          onChange={(e) => setSearch(e.target.value)}
+          autoFocus
+        />
         <ButtonToolTipDiv>
           <button onClick={() => setModal(true)}>+</button>
           <ToolTipDiv className="tooltip">
@@ -60,17 +74,19 @@ const Dashboard = () => {
       </NavTag>
       <WineForm modalVisibility={modalVisibility} setModal={setModal} />
       <WinesAreaGrid>
-        {wines.map((wine) => (
-          wine.user === user_id ?
-          <WineCard key={wine._id}>
-            <img src={wine.thumbnail_url} alt="wine bottle test" />
-            <div>
-              <span>{wine.wineLabel}</span>
-              <time>{new Date(wine.updated).toLocaleDateString()}</time>
-            </div>
-          </WineCard>
-          : ''
-        ))}
+        {filteredWines.map((wine) =>
+          wine.user === user_id ? (
+            <WineCard key={wine._id}>
+              <img src={wine.thumbnail_url} alt="wine bottle test" />
+              <div>
+                <span>{wine.wineLabel}</span>
+                <time>{new Date(wine.updated).toLocaleDateString()}</time>
+              </div>
+            </WineCard>
+          ) : (
+            ''
+          )
+        )}
       </WinesAreaGrid>
     </DashboardDiv>
   );

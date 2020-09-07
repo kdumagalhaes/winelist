@@ -7,13 +7,13 @@ module.exports = {
     try {
       const { email, password } = req.body;
       if (!email || !password) {
-        return res.status(200).json({ message: 'Required field missing.' });
+        return res.status(400).json({ message: 'Required field missing.' });
       }
 
       const user = await User.findOne({ email });
       if (!user) {
         return res
-          .status(200)
+          .status(404)
           .json({
             message: 'User not found!',
           });

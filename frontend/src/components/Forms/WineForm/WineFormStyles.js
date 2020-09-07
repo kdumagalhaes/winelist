@@ -11,6 +11,7 @@ export const ContainerDiv = styled.div`
   top: 0;
   visibility: ${({ modalVisibility }) => modalVisibility};
   z-index: 1;
+  overflow: hidden;
 `;
 
 export const CloseBtn = styled.button`
@@ -50,6 +51,11 @@ export const WineFormTag = styled.form`
   input[value] {
       color: ${({ theme }) => theme.colors.color4};
   }
+
+  textarea {
+      color: ${({ theme }) => theme.colors.color4};
+  }
+
 `;
 
 export const ThumbPreviewArea = styled.div`

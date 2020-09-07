@@ -34,11 +34,15 @@ export const LeftDiv = styled.div`
   }
 
   h3 {
-    a {
+    button {
       color: ${({ theme }) => theme.colors.color5};
       transition: ${({ theme }) => theme.transitions.primaryTransitionAll};
       cursor: pointer;
       text-decoration: underline;
+      background: transparent;
+      border: none;
+      font-weight: 700;
+      font-size: 1.05rem;
 
       &:hover {
         color: ${({ theme }) => theme.colors.color4};
