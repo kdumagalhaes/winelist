@@ -6,10 +6,11 @@ export const ContainerDiv = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.85);
   position: absolute;
   top: 0;
   visibility: ${({ modalVisibility }) => modalVisibility};
+  z-index: 1;
 `;
 
 export const CloseBtn = styled.button`
@@ -40,6 +41,7 @@ export const WineFormTag = styled.form`
   display: flex;
   background-color: ${({ theme }) => theme.colors.color0};
   position: relative;
+  z-index: 5;
 
   @media (max-width: 768px) {
     flex-direction: column;

@@ -35,7 +35,7 @@ const RegisterForm = ({ history }) => {
       if (userId) {
         localStorage.setItem('user', userId);
         localStorage.setItem('firstName', firstName);
-        history.push('/dashboard');
+        history.push('/');
       } else {
         const { message } = response.data;
         setError(true);

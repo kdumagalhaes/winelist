@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { LoginFormTag, InputsDiv, AlertDiv } from './LoginFormStyles';
+import { LoginFormTag, InputsDiv } from './LoginFormStyles';
 import { RiAlertLine } from 'react-icons/ri';
 
 import Logo from '../../Logo/Logo';
 import PrimaryBtn from '../../Buttons/PrimaryBtn';
-import ErrorAlert from '../../Alerts/ErrorAlerts/ErrorAlert'
+import ErrorAlert from '../../Alerts/ErrorAlerts/ErrorAlert';
 
 import api from '../../../services/api';
 
@@ -20,10 +20,12 @@ const LoginForm = ({ history }) => {
 
     const response = await api.post('/login', { email, password });
     const userId = response.data._id || false;
+    const firstName = response.data.firstName;
 
     try {
       if (userId) {
         localStorage.setItem('user', userId);
+        localStorage.setItem('firstName', firstName);
         history.push('/');
       } else {
         const { message } = response.data;
@@ -36,7 +38,7 @@ const LoginForm = ({ history }) => {
       }
     } catch (error) {
       setError(true);
-      setErrorMessage('Error, the server returned an error');
+      setErrorMessage('Error! The server returned an error.');
     }
   };
 
@@ -66,7 +68,6 @@ const LoginForm = ({ history }) => {
       {error ? (
         <ErrorAlert>
           <RiAlertLine />
-          
           {errorMessage}
         </ErrorAlert>
       ) : (

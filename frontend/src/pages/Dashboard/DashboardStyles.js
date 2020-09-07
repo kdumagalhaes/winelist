@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const DashboardDiv = styled.div`
   width: 100%;
+  height: auto;
   position: relative;
 `;
 
@@ -13,6 +14,8 @@ export const NavTag = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1;
+  box-shadow: ${({theme}) => theme.shadows.mediumShadow};
 
   input,
   span {
@@ -75,6 +78,7 @@ export const NavTag = styled.nav`
 
 export const ButtonToolTipDiv = styled.div`
   position: relative;
+  z-index: 1;
 `;
 
 export const ToolTipDiv = styled.div`
@@ -94,4 +98,18 @@ export const ToolTipDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   font-size: 0.9rem;
+  box-shadow: ${({theme}) => theme.shadows.mediumShadow};
+`;
+
+export const WinesAreaGrid = styled.div`
+  width: 100%;
+  max-width: 1380px;
+  margin: 40px auto;
+  padding: 0 40px 0 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 30px;
+  position: relative;
+  z-index: 0;
 `;

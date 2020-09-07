@@ -1,7 +1,6 @@
 import React from 'react';
 import { RegisterPageDiv, LeftDiv, RightDiv } from './RegisterStyles';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 
 import Logo from '../../components/Logo/Logo';
 import RegisterForm from '../../components/Forms/RegisterForm/RegisterForm'
@@ -21,7 +20,7 @@ const RegisterPage = ({history}) => {
         <RegisterForm history={history}/>
         <span>Already have an account?</span>
         <h3>
-          <a onClick={() => history.push("/login")}>Log in</a>
+          <button onClick={() => history.push("/login")}>Log in</button>
         </h3>
       </LeftDiv>
       <RightDiv></RightDiv>

@@ -10,22 +10,29 @@ import {
 } from './WineFormStyles';
 import { BiCamera } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
-import { RiAlertLine } from "react-icons/ri";
-import api from '../../../services/api'
+import { RiAlertLine } from 'react-icons/ri';
+import { MdDone } from 'react-icons/md';
+import api from '../../../services/api';
+import SuccessAlert from '../../Alerts/SuccessAlerts/SuccessAlert';
 
 const WineForm = ({ modalVisibility, setModal }) => {
   const [wineLabel, setWineLabel] = useState('');
   const [harvest, setHarvest] = useState('');
   const [comments, setComments] = useState('');
   const [thumbnail, setThumbNail] = useState(null);
-  const [updated, setUpdated] = useState('');
+  // const [updated, setUpdated] = useState('');
   const [price, setPrice] = useState('');
   const [wineType, setWineType] = useState('');
-  const [errorMessage, setErrorMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
   }, [thumbnail]);
+
+  const reloadDashboard = () => {
+    window.location.reload();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +45,7 @@ const WineForm = ({ modalVisibility, setModal }) => {
     wineData.append('harvest', harvest);
     wineData.append('comments', comments);
     wineData.append('thumbnail', thumbnail);
-    wineData.append('updated', updated);
+    // wineData.append('updated', updated);
     wineData.append('price', price);
     wineData.append('wineType', wineType);
 
@@ -53,23 +60,47 @@ const WineForm = ({ modalVisibility, setModal }) => {
       ) {
         await api.post('/wine', wineData, { headers: { user_id } });
         console.log('Wine has been sent');
-      } else {
-        setErrorMessage(true)
+        setSuccessMessage(true)
         setTimeout(() => {
-          setErrorMessage(false)
-        }, 2000)
+          setSuccessMessage(false)
+          setModal(false);
+          reloadDashboard();
+        }, 2000);
+      } else {
+        setErrorMessage(true);
+        setTimeout(() => {
+          setErrorMessage(false);
+        }, 2000);
       }
     } catch (error) {
-      Promise.reject(error)
+      Promise.reject(error);
     }
+  };
 
-
+  const handleCloseWineForm = (e) => {
+    if (
+      wineLabel !== '' &&
+      thumbnail !== '' &&
+      harvest !== '' &&
+      wineType !== ''
+    ) {
+      return;
+    } else {
+      e.preventDefault();
+    }
   };
 
   return (
     <ContainerDiv modalVisibility={modalVisibility}>
-      <WineFormTag onSubmit={handleSubmit}>
-        <CloseBtn onClick={() => setModal(false)}>X</CloseBtn>
+      <WineFormTag>
+        <CloseBtn
+          onClick={(e) => {
+            setModal(false);
+            handleCloseWineForm(e);
+          }}
+        >
+          X
+        </CloseBtn>
         <ThumbPreviewDiv>
           <div>
             <input
@@ -95,11 +126,12 @@ const WineForm = ({ modalVisibility, setModal }) => {
           <input
             id="wine-label"
             name="wine-label"
-            placeholder="Enter the wine label..."
+            placeholder="Max 24 char..."
             type="text"
             value={wineLabel}
             onChange={(e) => setWineLabel(e.target.value)}
             autoFocus
+            maxLength="24"
           />
           <label htmlFor="type">Type:</label>
           <input
@@ -138,10 +170,19 @@ const WineForm = ({ modalVisibility, setModal }) => {
             value={comments}
             onChange={(e) => setComments(e.target.value)}
           />
-          <button type="submit">Insert Wine</button>
+          <button onClick={handleSubmit} type="submit">
+            Insert Wine
+          </button>
           {errorMessage ? (
-          <AlertDiv><RiAlertLine/> You have to complete all the fields!</AlertDiv>
-        ) : ''}
+            <AlertDiv>
+              <RiAlertLine /> You have to complete all the fields!
+            </AlertDiv>
+          ) : (
+            ''
+          )}
+          {successMessage ? <SuccessAlert>
+            <MdDone/> Wine has been registered!
+          </SuccessAlert> : ''}
         </InfoDiv>
       </WineFormTag>
     </ContainerDiv>

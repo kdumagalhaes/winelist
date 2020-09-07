@@ -1,14 +1,14 @@
-import React from 'react'
-import {WinePageDiv} from './WinePageStyles'
-import WineForm from '../../components/Forms/WineForm/WineForm'
+// import React from 'react'
+// import {WinePageDiv} from './WinePageStyles'
+// import WineForm from '../../components/Forms/WineForm/WineForm'
 
-const WinePage = () => {
+// const WinePage = () => {
 
-    return (
-        <WinePageDiv>
-            <WineForm/>
-        </WinePageDiv>
-    )
-}
+//     return (
+//         <WinePageDiv>
+//             <WineForm/>
+//         </WinePageDiv>
+//     )
+// }
 
-export default WinePage
+// export default WinePage
