@@ -18,6 +18,7 @@ export const RegisterFormTag = styled.form`
     border: none;
     background-color: ${({ theme }) => theme.colors.color1};
     padding: 0 15px;
+    color: ${({ theme }) => theme.colors.color4};
 
     &::placeholder {
       color: ${({ theme }) => theme.colors.color4};

@@ -31,5 +31,19 @@ module.exports = {
             message: 'We do not have any wines yet.',
           });
         }
-      }
+      },
+
+      async getWinesByUserId(req, res) {
+        const { user_id } = req.headers;
+
+        try {
+            const wines = await Wine.find({ user: user_id })
+
+            if (wines) {
+                return res.json(wines)
+            }
+        } catch (error) {
+            return res.status(400).json({ message: `We do have any wines with the user_id ${user_id}`})
+        }
+    }
 }

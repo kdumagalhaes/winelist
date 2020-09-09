@@ -9,7 +9,7 @@ export const LoginFormTag = styled.form`
   flex-direction: column;
   align-items: center;
 
-  input[value] {
+  input {
       color: ${({ theme }) => theme.colors.color4};
   }
 `;

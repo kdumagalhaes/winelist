@@ -21,7 +21,6 @@ const Dashboard = () => {
   const firstName = localStorage.getItem('firstName');
   const [wines, setWines] = useState([]);
   const [search, setSearch] = useState('');
-  console.log(search);
 
   const filteredWines = wines.filter((wine) => {
     return (
@@ -47,7 +46,7 @@ const Dashboard = () => {
   return (
     <DashboardDiv>
       <Helmet>
-        <title>WineList • My wines</title>
+        <title>WineBoard • {firstName} wines</title>
       </Helmet>
       <NavTag>
         <Logo />
@@ -55,7 +54,7 @@ const Dashboard = () => {
           id="searchBar"
           name="searchBar"
           type="search"
-          placeholder="Find your wine..."
+          placeholder="Find your wine by the label or the type..."
           onChange={(e) => setSearch(e.target.value)}
           autoFocus
         />
@@ -74,18 +73,19 @@ const Dashboard = () => {
       </NavTag>
       <WineForm modalVisibility={modalVisibility} setModal={setModal} />
       <WinesAreaGrid>
-        {filteredWines.map((wine) =>
+        {filteredWines.map((wine) => 
           wine.user === user_id ? (
-            <WineCard key={wine._id}>
-              <img src={wine.thumbnail_url} alt="wine bottle test" />
-              <div>
-                <span>{wine.wineLabel}</span>
-                <time>{new Date(wine.updated).toLocaleDateString()}</time>
-              </div>
-            </WineCard>
-          ) : (
-            ''
-          )
+            <WineCard
+              id={wine._id}
+              thumbnailUrl={wine.thumbnail_url}
+              wineLabel={wine.wineLabel}
+              update={new Date(wine.updated).toLocaleDateString()}
+              comments={wine.comments}
+              harvest={wine.harvest}
+              price={wine.price.toLocaleString('en',{style: 'currency', currency: 'USD'})}
+              type={wine.wineType} 
+            />
+          ) : ''
         )}
       </WinesAreaGrid>
     </DashboardDiv>

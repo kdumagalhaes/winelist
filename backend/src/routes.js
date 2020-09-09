@@ -29,6 +29,7 @@ routes.post('/login', LoginController.store)
 routes.get('/dashboard', DashboardController.getAllWines)
 routes.get('/dashboard/:wineType', DashboardController.getAllWines)
 routes.get('/wine/:wineId', DashboardController.getWineById)
+routes.get('/user/wines', DashboardController.getWinesByUserId)
 
 //Wine
 routes.post('/wine', upload.single("thumbnail"), WineController.createWine)

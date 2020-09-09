@@ -48,11 +48,7 @@ export const WineFormTag = styled.form`
     flex-direction: column;
   }
 
-  input[value] {
-      color: ${({ theme }) => theme.colors.color4};
-  }
-
-  textarea {
+  input, textarea {
       color: ${({ theme }) => theme.colors.color4};
   }
 
@@ -108,7 +104,8 @@ export const InfoDiv = styled.div`
   width: 100%;
 
   input,
-  textarea {
+  textarea,
+  select {
     width: 100%;
     border: none;
     background-color: ${({ theme }) => theme.colors.color1};
@@ -120,13 +117,21 @@ export const InfoDiv = styled.div`
     }
   }
 
+  select {
+    color: ${({ theme }) => theme.colors.color4};
+  }
+
+  option {
+      color: ${({ theme }) => theme.colors.color3};
+    }
+
   label {
     margin-bottom: 10px;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.color4};
   }
 
-  input {
+  input, select {
     height: 45px;
   }
 

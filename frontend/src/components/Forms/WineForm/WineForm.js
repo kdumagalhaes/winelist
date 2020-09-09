@@ -59,13 +59,12 @@ const WineForm = ({ modalVisibility, setModal }) => {
         thumbnail !== null
       ) {
         await api.post('/wine', wineData, { headers: { user_id } });
-        console.log('Wine has been sent');
-        setSuccessMessage(true)
+        setSuccessMessage(true);
         setTimeout(() => {
-          setSuccessMessage(false)
+          setSuccessMessage(false);
           setModal(false);
           reloadDashboard();
-        }, 2000);
+        }, 1000);
       } else {
         setErrorMessage(true);
         setTimeout(() => {
@@ -134,15 +133,14 @@ const WineForm = ({ modalVisibility, setModal }) => {
             maxLength="24"
           />
           <label htmlFor="type">Type:</label>
-          <input
-            id="type"
-            name="type"
-            placeholder="Enter the wine label..."
-            type="text"
-            value={wineType}
-            onChange={(e) => setWineType(e.target.value)}
-            autoFocus
-          />
+          <select id="type" name="type" onChange={(e) => setWineType(e.currentTarget.value)} required>
+          <option className="defaultOption" value="" defaultValue>Choose the type</option>
+            <option value="Red">Red</option>
+            <option value="White">White</option>
+            <option value="Rosé">Rosé</option>
+            <option value="Sparkling">Sparkling</option>
+            <option value="Orange">Orange</option>
+          </select>
           <label htmlFor="harvest">Harvest:</label>
           <input
             id="harvest"
@@ -165,10 +163,11 @@ const WineForm = ({ modalVisibility, setModal }) => {
           <textarea
             id="comments"
             name="comments"
-            placeholder="Make some comments..."
+            placeholder="Make some comments... (230 char. max)"
             type="text"
             value={comments}
             onChange={(e) => setComments(e.target.value)}
+            maxLength="230"
           />
           <button onClick={handleSubmit} type="submit">
             Insert Wine
@@ -180,9 +179,13 @@ const WineForm = ({ modalVisibility, setModal }) => {
           ) : (
             ''
           )}
-          {successMessage ? <SuccessAlert>
-            <MdDone/> Wine has been registered!
-          </SuccessAlert> : ''}
+          {successMessage ? (
+            <SuccessAlert>
+              <MdDone /> Wine has been registered!
+            </SuccessAlert>
+          ) : (
+            ''
+          )}
         </InfoDiv>
       </WineFormTag>
     </ContainerDiv>
