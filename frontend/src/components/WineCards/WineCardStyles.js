@@ -2,14 +2,13 @@ import styled from 'styled-components';
 
 export const WineCardTag = styled.div`
   width: 100%;
-  height: auto;
   max-width: 315px;
-  transform: scale(1);
-  transition: background-color, transform 0.3s;
+  transition: transform 0.3s;
+  margin-bottom: 30px;
+  break-inside: avoid-column;
 
   &:hover {
     box-shadow: none;
-    transform: scale(1.02);
   }
 
   img {

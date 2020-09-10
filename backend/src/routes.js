@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer')
+const verifyToken = require('./config/verifyToken')
 
 const UserController = require('./controllers/UserController');
 const WineController = require('./controllers/WineController')
@@ -26,10 +27,10 @@ routes.get('/user/:userId', UserController.getUserById);
 routes.post('/login', LoginController.store)
 
 //Dashboard
-routes.get('/dashboard', DashboardController.getAllWines)
-routes.get('/dashboard/:wineType', DashboardController.getAllWines)
-routes.get('/wine/:wineId', DashboardController.getWineById)
-routes.get('/user/wines', DashboardController.getWinesByUserId)
+routes.get('/dashboard', verifyToken ,DashboardController.getAllWines)
+routes.get('/dashboard/:wineType', verifyToken ,DashboardController.getAllWines)
+routes.get('/wine/:wineId', verifyToken ,DashboardController.getWineById)
+routes.get('/user/wines', verifyToken ,DashboardController.getWinesByUserId)
 
 //Wine
 routes.post('/wine', upload.single("thumbnail"), WineController.createWine)

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DashboardDiv = styled.div`
   width: 100%;
   height: auto;
-  position: relative;
+  background-repeat: repeat;
 `;
 
 export const NavTag = styled.nav`
@@ -109,10 +109,6 @@ export const WinesAreaGrid = styled.div`
   max-width: 1380px;
   margin: 40px auto;
   padding: 0 40px 0 40px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  gap: 30px;
-  position: relative;
-  z-index: 0;
+  column-count: 4;
+  column-gap: 30px;
 `;

@@ -16,8 +16,9 @@ import Logo from '../../components/Logo/Logo';
 import WineForm from '../../components/Forms/WineForm/WineForm';
 import WineCard from '../../components/WineCards/WineCard';
 
-const Dashboard = () => {
-  const user_id = localStorage.getItem('user');
+const Dashboard = ({history}) => {
+  const user = localStorage.getItem('user');
+  const user_id = localStorage.getItem('user_id');
   const firstName = localStorage.getItem('firstName');
   const [wines, setWines] = useState([]);
   const [search, setSearch] = useState('');
@@ -30,10 +31,13 @@ const Dashboard = () => {
   });
 
   const getWines = async () => {
-    const url = '/dashboard';
-    const response = await api.get(url, { headers: { user_id } });
-
-    setWines(response.data);
+    try {
+      const url = '/dashboard';
+      const response = await api.get(url, { headers: { user: user } });
+      setWines(response.data.wines);
+    } catch (error) {
+      history.push('/login')
+    }
   };
 
   useEffect(() => {
@@ -73,7 +77,7 @@ const Dashboard = () => {
       </NavTag>
       <WineForm modalVisibility={modalVisibility} setModal={setModal} />
       <WinesAreaGrid>
-        {filteredWines.map((wine) => 
+        {filteredWines.map((wine) =>
           wine.user === user_id ? (
             <WineCard
               id={wine._id}
@@ -82,10 +86,15 @@ const Dashboard = () => {
               update={new Date(wine.updated).toLocaleDateString()}
               comments={wine.comments}
               harvest={wine.harvest}
-              price={wine.price.toLocaleString('en',{style: 'currency', currency: 'USD'})}
-              type={wine.wineType} 
+              price={wine.price.toLocaleString('en', {
+                style: 'currency',
+                currency: 'USD',
+              })}
+              type={wine.wineType}
             />
-          ) : ''
+          ) : (
+            ''
+          )
         )}
       </WinesAreaGrid>
     </DashboardDiv>
