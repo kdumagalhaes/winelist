@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { WinePageDiv } from './WinePageStyles';
 import api from '../../services/api';
 
-const WinePage = () => {
+const WinePage = ({history}) => {
   const user_id = localStorage.getItem('user_id');
+  const user = localStorage.getItem('user');
+
+  useEffect(() => {
+    if (!user) history.push('/login')
+  }, [])
 
   const [wines, setWines] = useState([]);
 

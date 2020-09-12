@@ -26,11 +26,6 @@ const WineForm = ({ modalVisibility, setModal, history }) => {
   const [wineType, setWineType] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
-  const user = localStorage.getItem('user')
-
-  useEffect(() => {
-    if (!user) history.push('/login')
-  }, [])
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;

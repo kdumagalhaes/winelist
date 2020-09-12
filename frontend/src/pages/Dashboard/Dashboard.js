@@ -40,9 +40,19 @@ const Dashboard = ({history}) => {
     }
   };
 
+  const logOutHandler = () => {
+    const user = localStorage.getItem('user');
+    const user_id = localStorage.getItem('user_id');
+    history.push('/login')
+  }
+
   useEffect(() => {
     getWines();
   }, []);
+
+  useEffect(() => {
+    if (!user) history.push('/login')
+  }, [])
 
   const [modal, setModal] = useState(false);
   const modalVisibility = modal ? 'visible' : 'hidden';
@@ -72,7 +82,7 @@ const Dashboard = ({history}) => {
           Welcome, <strong>{firstName}</strong>
         </span>
         <IconContext.Provider value={{ className: 'logout-icon' }}>
-          <RiLogoutBoxRLine />
+          <RiLogoutBoxRLine onClick={() => logOutHandler()} />
         </IconContext.Provider>
       </NavTag>
       <WineForm modalVisibility={modalVisibility} setModal={setModal} />
