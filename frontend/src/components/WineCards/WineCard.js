@@ -12,9 +12,10 @@ const WineCard = ({
   price,
   type,
 }) => {
+  const user = localStorage.getItem('user');
   const deleteEventHandler = async (id) => {
     try {
-      await api.delete(`/wine/${id}`);
+      await api.delete(`/wine/${id}`, {headers: {user: user}});
       window.location.reload()
     } catch (error) {
       console.log(error);

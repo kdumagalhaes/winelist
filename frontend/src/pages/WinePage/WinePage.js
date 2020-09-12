@@ -3,7 +3,7 @@ import { WinePageDiv } from './WinePageStyles';
 import api from '../../services/api';
 
 const WinePage = () => {
-  const user_id = localStorage.getItem('user');
+  const user_id = localStorage.getItem('user_id');
 
   const [wines, setWines] = useState([]);
 

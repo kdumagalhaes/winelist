@@ -7,6 +7,7 @@ const WineController = require('./controllers/WineController')
 const DashboardController = require('./controllers/DashboardController')
 const LoginController = require('./controllers/LoginController')
 const uploadConfig = require('./config/upload');
+const { verify } = require('jsonwebtoken');
 
 const routes = express.Router();
 const upload = multer(uploadConfig)
@@ -33,8 +34,8 @@ routes.get('/wine/:wineId', verifyToken ,DashboardController.getWineById)
 routes.get('/user/wines', verifyToken ,DashboardController.getWinesByUserId)
 
 //Wine
-routes.post('/wine', upload.single("thumbnail"), WineController.createWine)
-routes.delete('/wine/:wineId', WineController.delete)
+routes.post('/wine', verifyToken, upload.single("thumbnail"), WineController.createWine)
+routes.delete('/wine/:wineId', verifyToken, WineController.delete)
 
 
 module.exports = routes;

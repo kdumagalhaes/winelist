@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   WineFormTag,
   ThumbPreviewArea,
@@ -15,7 +15,8 @@ import { MdDone } from 'react-icons/md';
 import api from '../../../services/api';
 import SuccessAlert from '../../Alerts/SuccessAlerts/SuccessAlert';
 
-const WineForm = ({ modalVisibility, setModal }) => {
+
+const WineForm = ({ modalVisibility, setModal, history }) => {
   const [wineLabel, setWineLabel] = useState('');
   const [harvest, setHarvest] = useState('');
   const [comments, setComments] = useState('');
@@ -25,6 +26,11 @@ const WineForm = ({ modalVisibility, setModal }) => {
   const [wineType, setWineType] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
+  const user = localStorage.getItem('user')
+
+  useEffect(() => {
+    if (!user) history.push('/login')
+  }, [])
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
@@ -37,7 +43,7 @@ const WineForm = ({ modalVisibility, setModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user_id = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
 
     const wineData = new FormData();
 
@@ -58,7 +64,7 @@ const WineForm = ({ modalVisibility, setModal }) => {
         wineType !== '' &&
         thumbnail !== null
       ) {
-        await api.post('/wine', wineData, { headers: { user_id } });
+        await api.post('/wine', wineData, { headers: { user } });
         setSuccessMessage(true);
         setTimeout(() => {
           setSuccessMessage(false);
@@ -73,6 +79,7 @@ const WineForm = ({ modalVisibility, setModal }) => {
       }
     } catch (error) {
       Promise.reject(error);
+      console.log(error)
     }
   };
 
