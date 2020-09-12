@@ -11,12 +11,13 @@ import { GiWineGlass } from 'react-icons/gi';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { IconContext } from 'react-icons';
 import api from '../../services/api';
+import socketio from 'socket.io-client';
 
 import Logo from '../../components/Logo/Logo';
 import WineForm from '../../components/Forms/WineForm/WineForm';
 import WineCard from '../../components/WineCards/WineCard';
 
-const Dashboard = ({history}) => {
+const Dashboard = ({ history }) => {
   const user = localStorage.getItem('user');
   const user_id = localStorage.getItem('user_id');
   const firstName = localStorage.getItem('firstName');
@@ -36,23 +37,27 @@ const Dashboard = ({history}) => {
       const response = await api.get(url, { headers: { user: user } });
       setWines(response.data.wines);
     } catch (error) {
-      history.push('/login')
+      history.push('/login');
     }
   };
 
   const logOutHandler = () => {
-    const user = localStorage.getItem('user');
-    const user_id = localStorage.getItem('user_id');
-    history.push('/login')
-  }
+    localStorage.removeItem('user');
+    localStorage.removeItem('user_id');
+    history.push('/login');
+  };
 
   useEffect(() => {
     getWines();
   }, []);
 
   useEffect(() => {
-    if (!user) history.push('/login')
-  }, [])
+    const socket = socketio('http://localhost:8000/', { query: { user_id } });
+  }, []);
+
+  useEffect(() => {
+    if (!user) history.push('/login');
+  }, []);
 
   const [modal, setModal] = useState(false);
   const modalVisibility = modal ? 'visible' : 'hidden';
